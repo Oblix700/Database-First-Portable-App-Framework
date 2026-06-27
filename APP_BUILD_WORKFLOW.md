@@ -10,10 +10,13 @@ The AI must read:
 
 1. `README.md`
 2. `MASTER_PROMPT.md`
-3. All files in `standards/`
-4. Relevant templates in `templates/`
-5. Relevant SQL patterns in `sql/`
-6. Any screenshots, snippets, or design references supplied for the app
+3. `agent-skills/database_first_portable_app_builder.md`
+4. `docs/video_11_pillars_adaptation.md`
+5. All files in `standards/`
+6. Relevant templates in `templates/`
+7. Relevant checklists in `checklists/`
+8. Relevant SQL patterns in `sql/`
+9. Any screenshots, snippets, or design references supplied for the app
 
 No code may be written during this phase.
 
@@ -27,12 +30,14 @@ Minimum questions:
 2. Who will use it?
 3. What source data exists?
 4. Is there an Excel or CSV import?
-5. What must the user capture manually?
-6. What must be calculated?
-7. What must be exported?
-8. What dashboards or reports are required?
-9. What admin-managed dropdowns, settings, or rules are required?
-10. What must work offline?
+5. Are PDF or Word imports required?
+6. What must the user capture manually?
+7. What must be normalised and standardised?
+8. What must be calculated?
+9. What must be exported?
+10. What dashboards or reports are required?
+11. What admin-managed dropdowns, settings, or rules are required?
+12. What must work offline?
 
 Output: `PROJECT_SCOPE.md` for the specific app.
 
@@ -47,6 +52,10 @@ Source file or manual capture
 ↓
 Raw SQL table
 ↓
+Normalisation
+↓
+Standardisation
+↓
 Validation and mapping
 ↓
 Clean operational table
@@ -56,9 +65,23 @@ Views, reports, dashboards, exports
 
 Output: `DATABASE_PLAN.md`.
 
-## Phase 3: Design lookup and building-block tables
+## Phase 3: Design keys, indexes, lookup, and building-block tables
 
-Identify all reusable dropdowns, filters, statuses, categories, sections, rules, thresholds, and templates.
+Identify:
+
+- Primary keys.
+- Natural keys.
+- Unique keys.
+- Foreign keys.
+- Indexes for quick filtering and sorting.
+- Dropdowns.
+- Filters.
+- Statuses.
+- Categories.
+- Sections.
+- Rules.
+- Thresholds.
+- Templates.
 
 These must normally be stored in SQL tables, not hard-coded in the front end.
 
@@ -72,11 +95,13 @@ For every import source, define:
 2. Expected columns.
 3. Raw table.
 4. Field mapping.
-5. Validation rules.
-6. Error report.
-7. Transformation into cleaned tables.
-8. Duplicate handling.
-9. Import batch history.
+5. Normalisation rules.
+6. Standardisation rules.
+7. Validation rules.
+8. Error report.
+9. Transformation into cleaned tables.
+10. Duplicate handling.
+11. Import batch history.
 
 Output: `IMPORT_VALIDATION_PLAN.md`.
 
@@ -112,11 +137,36 @@ Required report builder features:
 - Sort before export.
 - Preview at least 3 sample rows.
 - Save report templates where useful.
-- Export to Excel, PDF, CSV, and other formats where required.
+- Export to Excel, PDF, CSV, Word, JSON, or SQLite backup where required.
 
 Output: `REPORT_EXPORT_PLAN.md`.
 
-## Phase 7: Reuse and code economy review
+## Phase 7: Production-readiness gates and nets
+
+Before coding, define gates and nets.
+
+Gates prevent bad work from entering the app:
+
+- Specification review.
+- Database review.
+- Import validation.
+- Reuse review.
+- Testing plan.
+- Release checklist.
+
+Nets catch failures after they happen:
+
+- Local logs.
+- Audit logs.
+- Import batch history.
+- Validation error history.
+- Backups.
+- Rollback release package.
+- User-friendly error handling.
+
+Output: `PRODUCTION_READINESS_PLAN.md`.
+
+## Phase 8: Reuse and code economy review
 
 Before coding, the AI must check whether any existing pattern can be reused:
 
@@ -129,10 +179,11 @@ Before coding, the AI must check whether any existing pattern can be reused:
 - Existing date picker or calendar component.
 - Existing table component.
 - Existing popup or drawer pattern.
+- Existing validation logic.
 
 Output: `REUSE_REVIEW.md`.
 
-## Phase 8: Build in small phases
+## Phase 9: Build in small phases
 
 Build only one controlled phase at a time.
 
@@ -140,38 +191,44 @@ Recommended build order:
 
 1. Project structure.
 2. SQLite foundation.
-3. Settings and lookup tables.
-4. Import batch and raw tables.
-5. Validation and cleaned tables.
-6. Main navigation shell.
-7. Primary data table screens.
-8. Detail popup/drawer screens.
-9. Reports and export builder.
-10. Dashboards and charts.
-11. Admin screens.
-12. Backup, restore, audit, and error handling.
-13. Final testing and clean-up.
+3. Migration system.
+4. Settings and lookup tables.
+5. Import batch and raw tables.
+6. Normalisation, standardisation, validation, and cleaned tables.
+7. Views and indexed list queries.
+8. Main navigation shell.
+9. Primary data table screens.
+10. Detail popup/drawer screens.
+11. Reports and export builder.
+12. Dashboards and charts.
+13. Admin screens.
+14. Backup, restore, audit, logs, and error handling.
+15. Final testing and clean-up.
 
-## Phase 9: Test and review
+## Phase 10: Test and review
 
 Test at minimum:
 
 - App starts offline.
 - App runs from folder.
 - Database is created correctly.
+- Migrations run correctly.
 - Imports work.
 - Raw data is preserved.
+- Normalisation and standardisation work.
 - Cleaned data is correct.
 - Dropdowns are admin-managed.
-- Filters work.
+- Filters and sorting work quickly.
 - Reports export correctly.
 - PDF and Excel output is usable.
 - Zoom controls work.
 - Dark and light mode work where included.
 - No duplicate components or unnecessary code paths were created.
 - Large files are split where appropriate.
+- Backup and restore work.
+- Errors are logged and shown to users safely.
 
-## Phase 10: Final release check
+## Phase 11: Final release check
 
 Before calling the app complete:
 
@@ -183,5 +240,7 @@ Before calling the app complete:
 6. Verify import/export edge cases.
 7. Verify backup and restore.
 8. Confirm the app can run offline.
-9. Produce user instructions.
-10. Produce a change log.
+9. Confirm logs and audit history work where required.
+10. Produce user instructions.
+11. Produce a change log.
+12. Keep previous release available for rollback.
