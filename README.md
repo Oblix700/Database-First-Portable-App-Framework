@@ -41,18 +41,20 @@ Instead of asking an AI tool to immediately build an app, the AI must first read
 
 1. Ask the AI to read `MASTER_PROMPT.md`.
 2. Ask the AI to follow `APP_BUILD_WORKFLOW.md`.
-3. Capture the app idea using `templates/app_requirements_template.md`.
-4. Design the database before designing screens.
-5. Create raw import tables, cleaned operational tables, lookup tables, views, and reports.
-6. Design the UI from the standards in `standards/03_ui_ux_standard.md`.
-7. Apply the production-readiness gates and nets in `standards/08_production_readiness_gates_and_nets.md`.
-8. Build in phases and review after each phase.
+3. Use `docs/how_to_start_a_new_app.md` as the practical step-by-step guide.
+4. Capture the app idea using `templates/app_requirements_template.md`.
+5. Design the database before designing screens.
+6. Create raw import tables, cleaned operational tables, lookup tables, views, and reports.
+7. Design the UI from the standards in `standards/03_ui_ux_standard.md`.
+8. Apply the production-readiness gates and nets in `standards/08_production_readiness_gates_and_nets.md`.
+9. Build in phases and review after each phase.
 
 ## Important framework files
 
 - `MASTER_PROMPT.md` - the main instruction file to give an AI before starting a new app.
 - `APP_BUILD_WORKFLOW.md` - the step-by-step build process.
 - `agent-skills/database_first_portable_app_builder.md` - the master app-builder skill.
+- `docs/how_to_start_a_new_app.md` - practical guide for starting a new app.
 - `docs/video_11_pillars_adaptation.md` - practical adaptation of the 11 production-readiness pillars.
 
 ## Standards
@@ -82,7 +84,13 @@ Instead of asking an AI tool to immediately build an app, the AI must first read
 - `checklists/import_export_review_checklist.md`
 - `checklists/reuse_and_code_economy_checklist.md`
 - `checklists/ui_review_checklist.md`
+- `checklists/gates_and_nets_design_checklist.md`
 - `checklists/production_release_checklist.md`
+
+## SQL patterns
+
+- `sql/database_foundation_patterns.sql`
+- `sql/migration_patterns.sql`
 
 ## Repository sections
 
